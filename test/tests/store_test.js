@@ -15,6 +15,17 @@ test("load and find", function() {
   equal(result.title, 'zomg');
 });
 
+test("save", function() {
+  var store = new Store();
+  store.load('article', 1, {title: 'zomg'});
+
+  var record = store.find('article', 1);
+  record.title = 'wat';
+  store.save(record);
+
+  equal(store.find('article', 1).title, 'wat');
+});
+
 test("fork", function() {
   var store = new Store();
   store.load('article', 1, {title: 'zomg'});

@@ -111,8 +111,13 @@ define("bigdata/store",
 
       find: function(klass, id) {
         if (arguments.length === 1) { id = ''; } // find by key
-        var map = this.map;
-        return map[klass+id];
+        var map = this.map,
+            key = klass+id,
+            record = map[key];
+
+        Object.defineProperty(record, '_bigdata_key', {value: key});
+
+        return record;
       },
 
       load: function(klass, id, data) {
@@ -123,6 +128,13 @@ define("bigdata/store",
 
         versions[key] = versionUuid++;
         map[key] = data;
+      },
+
+      save: function(record) {
+        var map = this.map,
+            key = record._bigdata_key;
+
+        this.load(key, record);
       },
 
       versionFor: function(klass, id) {
