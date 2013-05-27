@@ -80,7 +80,7 @@ test("merge - store updated, fork updated", function() {
   equal(conflicts.length, 1);
 });
 
-test("async merge", function() {
+test("resolve merge conflict", function() {
   var store = new Store();
   store.load('article', 1, {title: 'zomg'});
 
