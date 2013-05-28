@@ -15,6 +15,17 @@ test("load and find", function() {
   equal(result.title, 'zomg');
 });
 
+test("all", function() {
+  var store = new Store();
+  store.load("article", 1, {title: "uno"});
+  store.load("article", 2, {title: "dos"});
+  store.load("article", 3, {title: "tres"});
+
+  var records = store.all("article");
+
+  equal(records.length, 3);
+});
+
 test("save", function() {
   var store = new Store();
   store.load('article', 1, {title: 'zomg'});

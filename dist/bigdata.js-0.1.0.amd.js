@@ -80,9 +80,26 @@ define("bigdata/store",
             key = klass+id,
             record = map[key];
 
-        Object.defineProperty(record, '_bigdata_key', {value: key});
+        if (record && !record._bigdata_key) { Object.defineProperty(record, '_bigdata_key', {value: key}); }
 
         return record;
+      },
+
+      all: function(klass) {
+        var map = this.map,
+            records = [];
+
+        // TODO: optimize me
+        for (var key in map) {
+          var record = map[key];
+
+          if (key.indexOf(klass) === 0) {
+            if (record && !record._bigdata_key) { Object.defineProperty(record, '_bigdata_key', {value: key}); }
+            records.push(record);
+          }
+        }
+
+        return records;
       },
 
       load: function(klass, id, data) {
