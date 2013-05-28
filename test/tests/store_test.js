@@ -26,6 +26,15 @@ test("save", function() {
   equal(store.find('article', 1).title, 'wat');
 });
 
+test("remove", function() {
+  var store = new Store();
+  store.load('article', 1, {title: 'zomg'});
+
+  var record = store.remove('article', 1);
+
+  equal(store.find('article', 1), undefined);
+});
+
 test("fork", function() {
   var store = new Store();
   store.load('article', 1, {title: 'zomg'});
