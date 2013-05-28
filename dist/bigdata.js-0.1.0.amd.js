@@ -1,8 +1,10 @@
 define("bigdata",
-  ["bigdata/store"],
-  function(__dependency1__) {
+  ["bigdata/store","exports"],
+  function(__dependency1__, __exports__) {
     "use strict";
     var Store = __dependency1__.Store;
+
+    __exports__.Store = Store;
   });
 
 define("bigdata/merge_conflict",
